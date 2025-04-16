@@ -1,4 +1,4 @@
-![github-submission-banner](C:\Users\DELL\Desktop\Pratyush%20Jha\AlertaX\banner_readme.png)
+![github-submission-banner](/banner_readme.png)
 
 # 🚀 AlertaX - Disaster Alert System
 
@@ -30,9 +30,9 @@
 
 ### Team Members:
 
-- Khushi Kumari ([GitHub ]([Khushi5155 (Khushi Kumari) · GitHub](https://github.com/Khushi5155))/ [LinkedIn](https://www.linkedin.com/in/khushi-kumari-329370348/) / Team Leader)
+- Khushi Kumari (([Khushi5155 (Khushi Kumari) · GitHub](https://github.com/Khushi5155))/ [LinkedIn](https://www.linkedin.com/in/khushi-kumari-329370348/) / Team Leader)
 
-- Pratyush Jha ([GitHub]([pratyushjha06 (Pratyush Jha ) · GitHub](https://github.com/pratyush</u>jha06)) / [LinkedIn](https://www.linkedin.com/in/pratyushjha06/) )  
+- Pratyush Jha (([pratyushjha06 (Pratyush Jha ) · GitHub](https://github.com/pratyush</u>jha06)) / [LinkedIn](https://www.linkedin.com/in/pratyushjha06/) )  
 
 - Sunidhi Singh (GitHub / [LinkedIn ](https://www.linkedin.com/in/sunidhi-singh-08021b344/))
 
