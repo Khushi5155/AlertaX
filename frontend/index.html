@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlertaX - </title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+
+      <div class="logo">AlertaX</div>
+
+      <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Alerts</a>
+        <a href="#">Smart Map</a>
+        <a href="#">Emergency</a>
+        <a href="#">Resources</a>
+        <a href="#">Report Disaster</a>
+        <select name="language" class="language-select">
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="slider">
+      <div class="slide slide1"></div>
+      <div class="slide slide2"></div>
+      <div class="slide slide3"></div>
+    </div>
+    <div class="hero-content">
+      <h1>Stay Safe with AlertaX</h1>
+      <p>Real time disaster alerts, safety tips and emergency tools - all in one place</p>
+      <button>Get Started</button>
+    </div>
+  </section>
+
+
+  <!-- Headline Section-->
+  <div class="news-ticker">
+    <span class="ticker-title">🔴 Recent Disasters:</span>
+    <div class="ticker-wrap">
+      <div class="ticker-move">
+        <span>🌪️ Tornado hits Oklahoma | </span>
+        <span>🔥 Wildfires in California intensify | </span>
+        <span>🌊 Coastal flooding in Bangladesh | </span>
+        <span>🏔️ Earthquake in Nepal | </span>
+        <span>🌪️ Cyclone Remal strengthening in Bay of Bengal | </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chatbot -->
+  <div class="chatbot hidden" id="chatbot">
+    <div class="chatbot-header">Ask Me Anything!</div>
+    <div class="chatbot-body" id="chatBody">
+      <div class="chatbot-msg bot-msg">Hi! How can I help you?</div>
+    </div>
+    <div class="chatbot-footer">
+      <input type="text" id="userInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <button class="toggle-btn" onclick="toggleChat()">💬</button>
+
+
+  <section class="smart-map-section">
+    <h2> Smart Map</h2>
+    <p>Live view of disaster-prone areas and nearby shelters</p>
+    <div id="smartMap"></div>
+  </section>
+
+
+  <!-- Emergency Section -->
+  <section class="emergency-section">
+    <h2 class="section-title">⚠️ Emergency</h2>
+    <div class="emergency-container">
+
+      <div class="emergency-card">
+        <div class="card-header">📞 Emergency Helpline</div>
+        <ul class="card-list">
+          <li>🔥 Fire: <strong>101</strong></li>
+          <li>🚓 Police: <strong>100</strong></li>
+          <li>🚑 Ambulance: <strong>102</strong></li>
+          <li>🆘 Disaster Helpline: <strong>108</strong></li>
+        </ul>
+      </div>
+
+      <div class="emergency-card">
+        <div class="card-header">📘 Safety Guide</div>
+        <label for="guide-type">Select Disaster:</label>
+        <select id="guide-type" onchange="updateGuide()">
+          <option value="flood">Flood</option>
+          <option value="earthquake">Earthquake</option>
+          <option value="fire">Fire</option>
+          <option value="cyclone">Cyclone</option>
+          <option value="landslide">Landslide</option>
+        </select>
+        <ul id="guide-items" class="card-list"></ul>
+      </div>
+
+      <div class="emergency-card">
+        <div class="card-header">🛠️ Disaster Action Kit</div>
+        <label for="kit-type">Select Disaster:</label>
+        <select id="kit-type" onchange="updateKit()">
+          <option value="flood">Flood</option>
+          <option value="earthquake">Earthquake</option>
+          <option value="fire">Fire</option>
+          <option value="cyclone">Cyclone</option>
+          <option value="landslide">Landslide</option>
+        </select>
+        <ul id="kit-items" class="card-list"></ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!--Resources section-->
+  <section class="resources-section">
+    <h2>Resources</h2>
+    <div class="filters">
+      <select id="disasterSelect">
+        <option value="floods">Floods</option>
+        <option value="earthquake">Earthquake</option>
+        <option value="fire">Fire</option>
+      </select>
+      <select id="regionSelect">
+        <option value="north">North Region</option>
+        <option value="south">South Region</option>
+        <option value="east">East Region</option>
+        <option value="west">West Region</option>
+      </select>
+    </div>
+
+    <div class="cards" id="cardsContainer">
+    </div>
+  </section>
+
+
+<!-- Report Disaster Section-->
+  <section class="report-disaster-section">
+    <div class="container">
+      <h2 class="section-title">Report a Disaster</h2>
+
+      <form class="disaster-form">
+        <label for="disasterType">Disaster Type</label>
+        <select id="disasterType" name="disasterType" required>
+          <option value="" disabled selected>-- Select Type --</option>
+          <option value="flood">Flood</option>
+          <option value="earthquake">Earthquake</option>
+          <option value="cyclone">Cyclone</option>
+          <option value="wildfire">Wildfire</option>
+          <option value="landslide">Landslide</option>
+        </select>
+
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="Auto Detected or enter manually" required />
+
+        <label for="media">Upload Images/ Videos</label>
+        <input type="file" id="media" name="media" multiple />
+
+        <label for="description">Descriptions</label>
+        <textarea id="description" name="description" rows="4" placeholder="Describe the situation..."
+          required></textarea>
+
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="tel" name="contact" placeholder="Contact" required />
+        </div>
+
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+  </section>
+
+
+  <!--Footer-->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3 class="footer-title"><span class="alertax">Alerta</span><span class="x">X</span></h3>
+        <p>Stay Alert, Stay Safe</p>
+      </div>
+
+      <div class="footer-column">
+        <h4>🔗 Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Live Alerts</a></li>
+          <li><a href="#">Smart Map</a></li>
+          <li><a href="#">Emergency</a></li>
+          <li><a href="#">Mode</a></li>
+          <li><a href="#">Report</a></li>
+          <li><a href="#">Disaster</a></li>
+          <li><a href="#">Resources</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>📧 Contact Us</h4>
+        <p>Email: support@alertax.ai</p>
+        <p>Phone: +91 0000-XXXXXX</p>
+        <p>Location: Delhi, India</p>
+      </div>
+
+      <div class="footer-column">
+        <h4>🔗 Follow Us</h4>
+        <ul>
+          <li><a href="#">📘 Facebook</a></li>
+          <li><a href="#">📸 Instagram</a></li>
+          <li><a href="#">🐦 Twitter</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Disclaimer: This system is for public awareness. Always follow official government advisories.</p>
+      <p>© 2025 AlertaX built with ❤️ by Team Disaster Defense</p>
+    </div>
+  </footer>
+
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
