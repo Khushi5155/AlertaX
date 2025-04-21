@@ -1,3 +1,8 @@
+:root {
+  --bot-color: #4f46e5;
+  --user-color: #10b981;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -28,7 +33,7 @@ body {
 .logo {
   font-size: 1.8rem;
   font-weight: 700;
-  color: red;
+  color: #f94144;
   letter-spacing: 1px;
   margin-left: 2rem;
 }
@@ -58,11 +63,11 @@ body {
 }
 
 .nav-links a:hover {
-  color: #007bff;
+  color: #f94144;
 }
 
 .language-select {
-  padding: 0.3rem 0.5rem;
+  padding-top: 0.3rem ;
   font-size: 1rem;
   border-radius: 4px;
   border: 1px solid #ccc;
@@ -72,30 +77,45 @@ body {
   max-width: 150px;
   color: #333;
   appearance: none;
+  margin-top: 1rem;
 }
-
 
 @media (max-width: 768px) {
   .nav-content {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  .menu-toggle {
+    display: block;
   }
 
   .nav-links {
     display: none;
     flex-direction: column;
-    width: 100%;
-    margin-top: 1rem;
-    gap: 1rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    width: 200px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
   }
 
   .nav-links.active {
     display: flex;
   }
 
-  .menu-toggle {
-    display: block;
-    align-self: flex-end;
+  .nav-links a {
+    padding: 0.5rem 0;
+    color: #333;
+  }
+
+  .language-select {
+    width: 100%;
   }
 }
 
@@ -120,6 +140,18 @@ body {
   z-index: 0;
 }
 
+.slider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2); 
+  z-index: 1;
+  pointer-events: none;
+}
+
 .slide {
   position: absolute;
   width: 100%;
@@ -128,6 +160,7 @@ body {
   background-position: center;
   opacity: 0;
   animation: fadeSlider 15s infinite;
+  z-index: 0;
 }
 
 .slide1 {
@@ -235,7 +268,7 @@ body {
   display: inline-block;
   white-space: nowrap;
   padding-left: 100%;
-  animation: scrollTicker 25s linear infinite;
+  animation: scrollTicker 60s linear infinite;
 }
 
 .ticker-move span {
@@ -250,6 +283,57 @@ body {
   100% {
     transform: translateX(-100%);
   }
+}
+
+
+/* Notification bubble */
+.notify-content {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.icon i {
+  font-size: 1.3rem;
+  color: white;
+}
+
+.notify {
+  position: fixed;
+  bottom: 5rem;
+  right: 2rem;
+  background-color: #ff4444;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  z-index: 9999;
+  transition: all 0.4s ease-in-out;
+}
+
+.notify.hidden {
+  display: none;
+}
+
+.notify-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notify-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 
@@ -589,6 +673,7 @@ select {
   justify-content: space-between;
   gap: 30px;
   margin-bottom: 30px;
+  margin-left: 8.5rem;
 }
 
 .footer-column {
@@ -630,7 +715,6 @@ select {
 
 .footer-column ul li a:hover {
   color: #f94144;
-  text-decoration: underline;
 }
 
 .footer-bottom {

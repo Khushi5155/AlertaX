@@ -8,6 +8,33 @@ toggleBtn.addEventListener('click', () => {
 
 
 
+//Headline
+async function fetchDisasters() {
+  try {
+    const res = await fetch("http://localhost:5000/api/disasters");
+    const data = await res.json();
+
+    const ticker = document.getElementById("disaster-ticker");
+    ticker.innerHTML = ""; // Clear old items
+
+    data.disasters.forEach((disaster) => {
+      const span = document.createElement("span");
+      span.textContent = disaster + " | ";
+      ticker.appendChild(span);
+    });
+  } catch (error) {
+    console.error("Error fetching disaster updates:", error);
+    const ticker = document.getElementById("disaster-ticker");
+    ticker.innerHTML = "⚠️ Unable to fetch disaster updates |";
+  }
+}
+
+// Fetch every 60 seconds
+fetchDisasters();
+setInterval(fetchDisasters, 60000);
+
+
+
 // Initialize the map
 const map = L.map("smartMap").setView([20.5937, 78.9629], 5); // India center
 
