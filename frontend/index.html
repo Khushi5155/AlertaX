@@ -4,10 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AlertaX - </title>
+  <title>AlertaX - Stay Alert, Stay Safe </title>
   <link rel="stylesheet" href="style.css">
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body>
@@ -15,7 +16,7 @@
   <nav class="navbar">
     <div class="nav-content">
 
-      <div class="logo">AlertaX</div>
+      <div class="logo">Alerta<span class="x">X</span></div>
 
       <button class="menu-toggle" id="menu-toggle">&#9776;</button>
 
@@ -56,15 +57,26 @@
   <div class="news-ticker">
     <span class="ticker-title">🔴 Recent Disasters:</span>
     <div class="ticker-wrap">
-      <div class="ticker-move">
-        <span>🌪️ Tornado hits Oklahoma | </span>
-        <span>🔥 Wildfires in California intensify | </span>
-        <span>🌊 Coastal flooding in Bangladesh | </span>
-        <span>🏔️ Earthquake in Nepal | </span>
-        <span>🌪️ Cyclone Remal strengthening in Bay of Bengal | </span>
+      <div class="ticker-move" id="disaster-ticker">
+        <span>Loading updates...</span>
       </div>
     </div>
   </div>
+
+
+  <!--Alert-->
+  <div id="disasterNotify" class="notify hidden">
+    <div class="notify-content">
+      <span class="icon">
+        <span class="icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+      </span>
+      <span class="notify-text">🚨 Disaster Alert near you!</span>
+      <button onclick="closePopup()" class="close-btn">×</button>
+    </div>
+  </div>
+
+  <audio id="alertSound" src="alert.mp3" preload="auto"></audio>
+
 
   <!-- Chatbot -->
   <div class="chatbot hidden" id="chatbot">
@@ -81,6 +93,7 @@
   <button class="toggle-btn" onclick="toggleChat()">💬</button>
 
 
+  <!-- Maps -->
   <section class="smart-map-section">
     <h2> Smart Map</h2>
     <p>Live view of disaster-prone areas and nearby shelters</p>
@@ -154,7 +167,7 @@
   </section>
 
 
-<!-- Report Disaster Section-->
+  <!-- Report Disaster Section-->
   <section class="report-disaster-section">
     <div class="container">
       <h2 class="section-title">Report a Disaster</h2>
@@ -206,10 +219,8 @@
           <li><a href="#">Live Alerts</a></li>
           <li><a href="#">Smart Map</a></li>
           <li><a href="#">Emergency</a></li>
-          <li><a href="#">Mode</a></li>
-          <li><a href="#">Report</a></li>
-          <li><a href="#">Disaster</a></li>
           <li><a href="#">Resources</a></li>
+          <li><a href="#">Report Disaster</a></li>
         </ul>
       </div>
 
@@ -223,16 +234,16 @@
       <div class="footer-column">
         <h4>🔗 Follow Us</h4>
         <ul>
-          <li><a href="#">📘 Facebook</a></li>
-          <li><a href="#">📸 Instagram</a></li>
-          <li><a href="#">🐦 Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Twitter</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>Disclaimer: This system is for public awareness. Always follow official government advisories.</p>
-      <p>© 2025 AlertaX built with ❤️ by Team Disaster Defense</p>
+      <p>Disclaimer: This system is for hackathon project</p>
+      <p>© 2025 AlertaX built with ❤️ by Team Code trio</p>
     </div>
   </footer>
 
