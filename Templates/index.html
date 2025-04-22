@@ -3,12 +3,18 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff5722">
   <title>AlertaX - Stay Alert, Stay Safe </title>
-  <link rel="stylesheet" href="/Static/style.css">
+
   <!-- Leaflet CSS -->
+  <link rel="manifest "  href="{{ url_for('static', filename='manifest.json') }}">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <audio id="alertSound" src="{{ url_for('static', filename='alert.mp3') }}" preload="auto"></audio>
+
+
+
 </head>
 
 <body>
@@ -57,26 +63,30 @@
   <div class="news-ticker">
     <span class="ticker-title">🔴 Recent Disasters:</span>
     <div class="ticker-wrap">
-      <div class="ticker-move" id="disaster-ticker">
-        <span>Loading updates...</span>
+      <div class="ticker-move">
+        <span>🌪 Tornado hits Oklahoma | </span>
+        <span>🔥 Wildfires in California intensify | </span>
+        <span>🌊 Coastal flooding in Bangladesh | </span>
+        <span>🏔 Earthquake in Nepal | </span>
+        <span>🌪 Cyclone Remal strengthening in Bay of Bengal | </span>
       </div>
     </div>
   </div>
-
 
   <!--Alert-->
   <div id="disasterNotify" class="notify hidden">
     <div class="notify-content">
       <span class="icon">
+        <!-- SVG Warning Icon -->
         <span class="icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
       </span>
       <span class="notify-text">🚨 Disaster Alert near you!</span>
       <button onclick="closePopup()" class="close-btn">×</button>
     </div>
   </div>
+  
 
-  <audio id="alertSound" src="alert.mp3" preload="auto"></audio>
-
+  
 
   <!-- Chatbot -->
   <div class="chatbot hidden" id="chatbot">
@@ -93,7 +103,6 @@
   <button class="toggle-btn" onclick="toggleChat()">💬</button>
 
 
-  <!-- Maps -->
   <section class="smart-map-section">
     <h2> Smart Map</h2>
     <p>Live view of disaster-prone areas and nearby shelters</p>
@@ -103,7 +112,7 @@
 
   <!-- Emergency Section -->
   <section class="emergency-section">
-    <h2 class="section-title">⚠️ Emergency</h2>
+    <h2 class="section-title">⚠ Emergency</h2>
     <div class="emergency-container">
 
       <div class="emergency-card">
@@ -130,7 +139,7 @@
       </div>
 
       <div class="emergency-card">
-        <div class="card-header">🛠️ Disaster Action Kit</div>
+        <div class="card-header">🛠 Disaster Action Kit</div>
         <label for="kit-type">Select Disaster:</label>
         <select id="kit-type" onchange="updateKit()">
           <option value="flood">Flood</option>
@@ -172,7 +181,7 @@
     <div class="container">
       <h2 class="section-title">Report a Disaster</h2>
 
-      <form class="disaster-form">
+      <form id="report-form" class="disaster-form" enctype="multipart/form-data">
         <label for="disasterType">Disaster Type</label>
         <select id="disasterType" name="disasterType" required>
           <option value="" disabled selected>-- Select Type --</option>
@@ -243,15 +252,20 @@
 
     <div class="footer-bottom">
       <p>Disclaimer: This system is for hackathon project</p>
-      <p>© 2025 AlertaX built with ❤️ by Team Code trio</p>
+      <p>© 2025 AlertaX built with ❤ by Team Code trio</p>
     </div>
   </footer>
 
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
 
-  <script src="/Static/script.js"></script>
+
+
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 
 </body>
 

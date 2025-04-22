@@ -164,17 +164,17 @@ body {
 }
 
 .slide1 {
-  background-image: url('/Static/Assests/Images/hero-1.jpg');
+  background-image: url('/static/Assets/Images/hero-1.jpg');
   animation-delay: 0s;
 }
 
 .slide2 {
-  background-image: url('/Static/Assests/Images/hero-2.jpg');
+  background-image: url('/static/Assets/Images/hero-2.jpg');
   animation-delay: 5s;
 }
 
 .slide3 {
-  background-image: url('/Static/Assests/Images/hero-3.jpg');
+  background-image: url('/static/Assests/Images/hero-3.jpg');
   animation-delay: 10s;
 }
 
@@ -268,7 +268,7 @@ body {
   display: inline-block;
   white-space: nowrap;
   padding-left: 100%;
-  animation: scrollTicker 60s linear infinite;
+  animation: scrollTicker 25s linear infinite;
 }
 
 .ticker-move span {
@@ -284,7 +284,6 @@ body {
     transform: translateX(-100%);
   }
 }
-
 
 /* Notification bubble */
 .notify-content {
@@ -335,7 +334,6 @@ body {
   font-size: 1.2rem;
   cursor: pointer;
 }
-
 
 /* CHATBOT SECTION */
 .chatbot {
@@ -427,6 +425,22 @@ body {
   display: none;
 }
 
+.popup-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ff4444;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  z-index: 9999;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+.popup-alert .popup-close {
+  float: right;
+  cursor: pointer;
+}
 
 /*Map Section*/
 .smart-map-section {
@@ -693,7 +707,6 @@ select {
 .x {
   color: #fff;
 }
-
 .footer-column h4 {
   font-size: 18px;
   margin-bottom: 10px;
@@ -722,5 +735,20 @@ select {
   border-top: 1px solid #444;
   padding-top: 20px;
   font-size: 14px;
-  color: #aaa;
+  color: #aaa;
+}
+
+.test-alert-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: red;
+  color: white;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 9999;
 }
