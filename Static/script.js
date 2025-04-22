@@ -14,6 +14,8 @@ const socket = io.connect('http://localhost:5000');  // Adjust if needed
 let allVoices = [];
 let userMarker;
 let map;
+let currentUserLocation = null;  // 👈 Store user position
+
 
 // Initialize on load
 window.onload = function () {
@@ -53,8 +55,8 @@ function generateVoiceAlert(message) {
 
 let nearbyMarkers = []; // To manage & remove old markers if needed
 
-function fetchNearbyLocations(lat, lon, type) {
-  return fetch(`/api/nearby-locations?lat=${lat}&lon=${lon}&type=${type}`)
+function fetchNearbyLocations(lat, lng, type) {
+  return fetch(`/api/nearby-locations?lat=${lat}&lng=${lng}&type=${type}`)
     .then(res => {
       if (!res.ok) throw new Error(`HTTP error ${res.status}`);
       return res.json();
@@ -73,29 +75,31 @@ function fetchNearbyLocations(lat, lon, type) {
 }
 
 function displayLocationsOnMap(locations, type) {
-  console.log("Displaying locations:", locations);
-
-  // Optional: Remove old markers to avoid clutter
-  nearbyMarkers.forEach(marker => map.removeLayer(marker));
-  nearbyMarkers = [];
-
+  // Use CDN icons as a reliable fallback
   const iconUrl = type === "hospital"
-    ? "https://cdn-icons-png.flaticon.com/512/2965/2965567.png"
-    : "https://cdn-icons-png.flaticon.com/512/2276/2276931.png";
+    ? "https://cdn-icons-png.flaticon.com/512/2967/2967350.png" // Hospital icon
+    : "https://cdn-icons-png.flaticon.com/512/190/190411.png"; // Shelter icon
 
   const icon = L.icon({
-    iconUrl,
-    iconSize: [28, 28]
+    iconUrl: iconUrl,
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],     // Center bottom
+    popupAnchor: [0, -28],    // Popup above the icon
+    className: 'custom-marker' // Optional CSS class
   });
 
   locations.forEach(loc => {
+    const name = loc.name ?? `Unnamed ${type}`;
+    const address = loc.address ?? "No address available";
+
     const marker = L.marker([loc.lat, loc.lon], { icon })
       .addTo(map)
-      .bindPopup(`<strong>${loc.name || type}</strong><br>${loc.address || "No address available"}`);
+      .bindPopup(`<strong>${name}</strong><br>${address}`);
 
     nearbyMarkers.push(marker);
   });
 }
+
 
 //Headline
 async function fetchDisasters() {
@@ -177,7 +181,7 @@ function showPopup(message) {
   setTimeout(() => {
     popup.remove();
     stopVoiceAlert();
-  }, 100000);
+  }, 5000);
 }
 
 
@@ -215,11 +219,16 @@ socket.on('disaster_alert', (msg) => {
   const tryShowNearby = setInterval(() => {
     if (userMarker && map) {
       clearInterval(tryShowNearby);
-      const { lat, lng } = userMarker.getLatLng();
+  
+      // 🔄 Update currentUserLocation first
+      currentUserLocation = userMarker.getLatLng();
+      const { lat, lng } = currentUserLocation;
+  
       fetchNearbyLocations(lat, lng, "shelter");
       fetchNearbyLocations(lat, lng, "hospital");
     }
   }, 100);
+  
 });
 
 function closePopup() {
@@ -246,6 +255,7 @@ function startLiveLocationTracking() {
   navigator.geolocation.watchPosition(
     position => {
       const { latitude, longitude } = position.coords;
+      currentUserLocation = { lat: latitude, lng: longitude }; // ✅ store for late
       map.setView([latitude, longitude], 13);
 
       if (userMarker) {
@@ -261,6 +271,7 @@ function startLiveLocationTracking() {
           .openPopup();
       }
     },
+    
     error => {
       console.error("Location error:", error);
       alert("Location error occurred. Check permissions.");
@@ -271,6 +282,8 @@ function startLiveLocationTracking() {
       timeout: 10000
     }
   );
+  
+  
 }
 
 // Initialize Leaflet map
@@ -408,8 +421,8 @@ document.getElementById('report-form').addEventListener('submit', function (e) {
   formData.append("contact", document.querySelector('input[placeholder="Contact"]').value);
 
   const fileInput = document.querySelector('input[type="file"]');
-  if (fileInput.files.length > 0) {
-    formData.append("media", fileInput.files[0]);
+  if (fileInput && fileInput.files[0]) {
+    formData.append("file", fileInput.files[0]);
   }
 
   fetch('http://localhost:5000/report', {

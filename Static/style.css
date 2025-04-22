@@ -164,12 +164,12 @@ body {
 }
 
 .slide1 {
-  background-image: url('/static/Assets/Images/hero-1.jpg');
+  background-image: url('/static/Assests/Images/hero-1.jpg');
   animation-delay: 0s;
 }
 
 .slide2 {
-  background-image: url('/static/Assets/Images/hero-2.jpg');
+  background-image: url('/static/Assests/Images/hero-2.jpg');
   animation-delay: 5s;
 }
 
