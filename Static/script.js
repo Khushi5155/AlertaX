@@ -277,3 +277,23 @@ regionSelect.addEventListener("change", renderCards);
 
 // Initial render
 renderCards();
+
+
+
+//Report Disaster 
+const form = document.querySelector('.disaster-form');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+
+    const response = await fetch('http://localhost:5000/report', {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+    alert(result.message);
+    form.reset();
+  });

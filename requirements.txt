@@ -1,0 +1,9 @@
+Flask
+flask_socketio
+flask_cors
+fluvio
+eventlet
+pymongo
+python-dotenv
+werkzeug
+
