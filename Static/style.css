@@ -164,17 +164,17 @@ body {
 }
 
 .slide1 {
-  background-image: url('/Assests/Images/hero-1.jpg');
+  background-image: url('/Static/Assests/Images/hero-1.jpg');
   animation-delay: 0s;
 }
 
 .slide2 {
-  background-image: url('/Assests/Images/hero-2.jpg');
+  background-image: url('/Static/Assests/Images/hero-2.jpg');
   animation-delay: 5s;
 }
 
 .slide3 {
-  background-image: url('/Assests/Images/hero-3.jpg');
+  background-image: url('/Static/Assests/Images/hero-3.jpg');
   animation-delay: 10s;
 }
 
