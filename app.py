@@ -2,12 +2,10 @@ from flask import Flask, request, render_template, jsonify
 from flask_socketio import SocketIO
 from pymongo import MongoClient
 from dotenv import load_dotenv
-
+from datetime import datetime, timedelta, timezone
 from werkzeug.utils import secure_filename
 import os
 import requests
-
-
 
 
 load_dotenv()
@@ -16,10 +14,58 @@ app = Flask(__name__)
 
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+
+@app.route('/api/disasters')
+def get_disasters():
+    today = datetime.now(timezone.utc)
+    seven_days_ago = today - timedelta(days=7)
+
+    url = "https://api.reliefweb.int/v1/disasters?appname=live-disaster-app&profile=list&limit=20&sort[]=date.created:desc"
+
+    try:
+        response = requests.get(url)
+        data = response.json()
+
+        disasters_raw = data.get('data', [])
+
+        recent_disasters = []
+        for disaster in disasters_raw:
+            fields = disaster.get('fields', {})
+            name = fields.get('name')
+            date_str = fields.get('date', {}).get('created') or fields.get('date', {}).get('start')
+            
+            if not name or not date_str:
+                continue
+            
+            try:
+                event_date = datetime.fromisoformat(date_str.split("T")[0])
+            except ValueError:
+                continue
+
+            if seven_days_ago <= event_date <= today:
+                recent_disasters.append(f"{name} - {event_date.date()}")
+
+        # Fallback: use latest 10 if none in last 7 days
+        if not recent_disasters:
+            for disaster in disasters_raw[:10]:
+                fields = disaster.get('fields', {})
+                name = fields.get('name')
+                date_str = fields.get('date', {}).get('created') or fields.get('date', {}).get('start')
+                if name and date_str:
+                    date_only = date_str.split("T")[0]
+                    recent_disasters.append(f"{name} - {date_only}")
+
+        return jsonify({"disasters": recent_disasters})
+
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"error": "Failed to fetch disaster updates"}), 500
+
 
 
 @app.route("/receive", methods=["POST"])
@@ -94,6 +140,9 @@ def get_nearby_locations():
 
     return jsonify(locations)
 
+
+
+
 @app.route('/report', methods=['POST'])
 def report_disaster():
     data = {
@@ -114,6 +163,7 @@ def report_disaster():
 
     reports.insert_one(data)
     return jsonify({"message": "Disaster reported successfully"}), 200
+
 
 
 if __name__ == "__main__":
