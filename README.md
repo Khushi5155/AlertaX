@@ -111,27 +111,34 @@
 
 ### Requirements:
 
-- Node.js / Python / Docker / etc.
-- API Keys (if any)
-- .env file setup (if needed)
+- Python 3.10
+- Flask
+- Flask-SocketIO
+- Fluvio CLI (for real-time alert data streaming)
+- Browser with Geolocation support
+- Internet access (for map tiles & APIs)
 
 ### Local Setup:
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-team/project-name
+git clone https://github.com/Khushi5155/AlertaX.git
 
 # Install dependencies
-cd project-name
-npm install
+cd AlertaX
+pip install -r requirements.txt
 
-# Start development server
-npm run dev
+# Install Fluvio CLI (refer https://fluvio.io/docs/)
+# Start Fluvio cluster and create a topic
+fluvio topic create disaster-alerts
+
+#Disaster producer
+python alert_producer.py
+
+# Start the Flask app
+python3  app.py
+
 ```
-
-Provide any backend/frontend split or environment setup notes here.
-
----
 
 ## 🧬 Future Scope
 
