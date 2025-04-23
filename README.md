@@ -34,7 +34,7 @@
 
 - Pratyush Jha (([pratyushjha06 (Pratyush Jha ) · GitHub](https://github.com/pratyush</u>jha06)) / [LinkedIn](https://www.linkedin.com/in/pratyushjha06/) )  
 
-- Sunidhi Singh (GitHub / [LinkedIn ](https://www.linkedin.com/in/sunidhi-singh-08021b344/))
+- Sunidhi Singh (([GitHub]([Sunidhi037 · GitHub](https://github.com/Sunidhi037)) / [LinkedIn ](https://www.linkedin.com/in/sunidhi-singh-08021b344/))
 
 ### Our Approach:
 
@@ -59,7 +59,7 @@
 - Frontend: HTML, CSS, JavaScript 
 - Backend: JavaScript, Python(flask)
 - Database: MongoDB
-- APIs: ReliefWeb Disasters API 
+- APIs: ReliefWeb Disasters API, ReliefWeb Disasters API, Web Speech API (SpeechSynthesis ), Socket.io, The WebSocket API (WebSockets)
 - Hosting:
 
 ### Sponsor Technologies Used (if any):
@@ -106,14 +106,17 @@
 ---
 
 ---
+
 ## 🧪 How to Run the Project
 
 ### Requirements:
+
 - Node.js / Python / Docker / etc.
 - API Keys (if any)
 - .env file setup (if needed)
 
 ### Local Setup:
+
 ```bash
 # Clone the repo
 git clone https://github.com/your-team/project-name
@@ -135,6 +138,7 @@ Provide any backend/frontend split or environment setup notes here.
 List improvements, extensions, or follow-up features:
 
 - 📈 More integrations  
+  
   - - **Social Media Feeds:** Integrate real-time disaster alerts from X (Twitter), Facebook, and Instagram.
     
     - **Government APIs:** Plug into official APIs (e.g., NDMA, IMD, FEMA) for verified disaster data.
@@ -142,7 +146,9 @@ List improvements, extensions, or follow-up features:
     - **Communication Platforms:** Connect with platforms like WhatsApp, Telegram, or SMS gateways for alert broadcasting.
     
     - **Mapping Tools:** Integrate Google Maps or Mapbox for better geospatial visualizations of disaster reports.
+
 - 🛡️ Security enhancements  
+  
   - - **User Authentication:** Add role-based logins for admin, reporter, and general users using JWT or OAuth.
     
     - **Spam Protection:** CAPTCHA/recaptcha on report forms to avoid fake entries.
@@ -150,7 +156,9 @@ List improvements, extensions, or follow-up features:
     - **Rate Limiting & API Security:** Prevent abuse by limiting requests, using secure headers, and validation checks.
     
     - **Encryption:** Encrypt sensitive data (e.g., user location or contact) during both transmission and storage.
+
 - 🌐 Localization / broader accessibility  
+  
   - - **Multi-language Support:** Add options for regional languages (Hindi, Bengali, Tamil, etc.) using i18n libraries.
     
     - **Screen Reader Compatibility:** Make your UI accessible with ARIA labels and proper HTML semantics.
@@ -165,13 +173,42 @@ List improvements, extensions, or follow-up features:
 
 - [ReliefWeb Disasters API](https://apidoc.reliefweb.int/) 
 - [Leaflet map](https://leafletjs.com/)
-- Open source libraries or tools referenced  
-- Acknowledgements  
+- [Web Speech API (SpeechSynthesis)]([Web Speech API - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API))
+- [Socket.io](https://socket.io/)
+- [The WebSocket API (WebSockets)]([The WebSocket API (WebSockets) - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API))
+- [Font Awesome](https://fontawesome.com/)
 
 ---
 
 ## 🏁 Final Words
 
-Share your hackathon journey — challenges, learnings, fun moments, or shout-outs!
+🏁 Final Words
+
+In the middle of the night (and a lot of chai), we thought — what if we had a single platform that could instantly report, track, and alert people about disasters in real-time?  
+That's how *alertaX* was born — a disaster awareness and reporting tool designed to save lives with speed and clarity.
+
+⚔ The Challenges:
+
+- Balancing *real-time data handling* without complex APIs was tricky — finding that “easy but powerful” solution took time.
+
+- Designing something *accessible* to everyone, from urban dwellers to rural communities, wasn’t as easy as it sounds.
+
+📚 The Learnings:
+
+- Importance of *modular code structure*.
+
+- Learned about *secure data handling* and why even small projects need security planning.
+
+- Got hands-on with *progressive enhancement*, making sure the site works well even in low bandwidth areas.
+
+😂 Fun Moments:
+
+- Arguing over button colors at 3AM — because obviously, the Save Lives button can’t be plain blue 🙄
+
+🙌 Shout-outs:
+
+- Huge thanks to my teammate(s), late-night playlist, and VS Code.
+
+- And a special mention to *ctrl+Z*
 
 ---
