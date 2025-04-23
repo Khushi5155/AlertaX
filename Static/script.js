@@ -104,11 +104,11 @@ function displayLocationsOnMap(locations, type) {
 //Headline
 async function fetchDisasters() {
   try {
-    const res = await fetch("http://localhost:5000/api/disasters");
+    const res = await fetch("/api/disasters");
     const data = await res.json();
 
     const ticker = document.getElementById("disaster-ticker");
-    ticker.innerHTML = ""; // Clear old items
+    ticker.innerHTML = "";
 
     data.disasters.forEach((disaster) => {
       const span = document.createElement("span");
@@ -118,13 +118,14 @@ async function fetchDisasters() {
   } catch (error) {
     console.error("Error fetching disaster updates:", error);
     const ticker = document.getElementById("disaster-ticker");
-    ticker.innerHTML = "⚠ Unable to fetch disaster updates |";
+    ticker.innerHTML = "⚠️ Unable to fetch disaster updates |";
   }
 }
 
-// Fetch every 60 seconds
+// Fetch on load + every 60s
 fetchDisasters();
 setInterval(fetchDisasters, 60000);
+
 
 
 
