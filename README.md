@@ -34,7 +34,7 @@
 
 - Pratyush Jha (([pratyushjha06 (Pratyush Jha ) · GitHub](https://github.com/pratyush</u>jha06)) / [LinkedIn](https://www.linkedin.com/in/pratyushjha06/) )  
 
-- Sunidhi Singh (([GitHub]([Sunidhi037 · GitHub](https://github.com/Sunidhi037)) / [LinkedIn ](https://www.linkedin.com/in/sunidhi-singh-08021b344/))
+- Sunidhi Singh (([Sunidhi037 · GitHub](https://github.com/Sunidhi037)) / [LinkedIn ](https://www.linkedin.com/in/sunidhi-singh-08021b344/))
 
 ### Our Approach:
 
@@ -173,9 +173,9 @@ List improvements, extensions, or follow-up features:
 
 - [ReliefWeb Disasters API](https://apidoc.reliefweb.int/) 
 - [Leaflet map](https://leafletjs.com/)
-- [Web Speech API (SpeechSynthesis)]([Web Speech API - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API))
+- [Web Speech API - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 - [Socket.io](https://socket.io/)
-- [The WebSocket API (WebSockets)]([The WebSocket API (WebSockets) - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API))
+- [The WebSocket API (WebSockets) - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
 - [Font Awesome](https://fontawesome.com/)
 
 ---
