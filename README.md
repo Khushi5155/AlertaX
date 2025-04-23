@@ -57,9 +57,9 @@
 ### Core Technologies Used:
 
 - Frontend: HTML, CSS, JavaScript 
-- Backend:
-- Database:
-- APIs:
+- Backend: JavaScript, Python(flask)
+- Database: MongoDB
+- APIs: ReliefWeb Disasters API 
 - Hosting:
 
 ### Sponsor Technologies Used (if any):
@@ -101,6 +101,77 @@
 - [x] **All members of the team completed Bonus Task 1 - Sharing of Badges and filled the form (2 points)**  (Details in Participant Manual)
 - [x] **All members of the team completed Bonus Task 2 - Signing up for Sprint.dev and filled the form (3 points)**  (Details in Participant Manual)
 
-*(Mark with ✅ if completed)*
+*(Mark with ✅ if completed)
+
+---
+
+---
+## 🧪 How to Run the Project
+
+### Requirements:
+- Node.js / Python / Docker / etc.
+- API Keys (if any)
+- .env file setup (if needed)
+
+### Local Setup:
+```bash
+# Clone the repo
+git clone https://github.com/your-team/project-name
+
+# Install dependencies
+cd project-name
+npm install
+
+# Start development server
+npm run dev
+```
+
+Provide any backend/frontend split or environment setup notes here.
+
+---
+
+## 🧬 Future Scope
+
+List improvements, extensions, or follow-up features:
+
+- 📈 More integrations  
+  - - **Social Media Feeds:** Integrate real-time disaster alerts from X (Twitter), Facebook, and Instagram.
+    
+    - **Government APIs:** Plug into official APIs (e.g., NDMA, IMD, FEMA) for verified disaster data.
+    
+    - **Communication Platforms:** Connect with platforms like WhatsApp, Telegram, or SMS gateways for alert broadcasting.
+    
+    - **Mapping Tools:** Integrate Google Maps or Mapbox for better geospatial visualizations of disaster reports.
+- 🛡️ Security enhancements  
+  - - **User Authentication:** Add role-based logins for admin, reporter, and general users using JWT or OAuth.
+    
+    - **Spam Protection:** CAPTCHA/recaptcha on report forms to avoid fake entries.
+    
+    - **Rate Limiting & API Security:** Prevent abuse by limiting requests, using secure headers, and validation checks.
+    
+    - **Encryption:** Encrypt sensitive data (e.g., user location or contact) during both transmission and storage.
+- 🌐 Localization / broader accessibility  
+  - - **Multi-language Support:** Add options for regional languages (Hindi, Bengali, Tamil, etc.) using i18n libraries.
+    
+    - **Screen Reader Compatibility:** Make your UI accessible with ARIA labels and proper HTML semantics.
+    
+    - **Voice Assistance:** Implement voice input or text-to-speech features for people with disabilities.
+    
+    - **Offline Support (PWA):** Enable offline disaster reporting in poor network areas using Progressive Web App features.
+
+---
+
+## 📎 Resources / Credits
+
+- [ReliefWeb Disasters API](https://apidoc.reliefweb.int/) 
+- [Leaflet map](https://leafletjs.com/)
+- Open source libraries or tools referenced  
+- Acknowledgements  
+
+---
+
+## 🏁 Final Words
+
+Share your hackathon journey — challenges, learnings, fun moments, or shout-outs!
 
 ---
