@@ -10,11 +10,11 @@ if ('serviceWorker' in navigator) {
 }
 
 
-const socket = io.connect('http://localhost:5000');  // Adjust if needed
+const socket = io.connect('http://localhost:5000'); 
 let allVoices = [];
 let userMarker;
 let map;
-let currentUserLocation = null;  // 👈 Store user position
+let currentUserLocation = null; 
 
 
 // Initialize on load
@@ -24,9 +24,9 @@ window.onload = function () {
   updateKit();
   renderCards();
   startLiveLocationTracking();
-  
-  
-  
+
+
+
   generateVoiceAlert(".........WELCOME TO THE Disaster Management System.......")
 };
 
@@ -131,7 +131,7 @@ setInterval(fetchDisasters, 60000);
 
 // Simulated logic – Replace with real API + geolocation later
 function stopVoiceAlert() {
-  if (alertInterval){
+  if (alertInterval) {
     clearInterval(alertInterval);
     alertInterval = null;
   }
@@ -167,7 +167,7 @@ function showPopup(message) {
 
 
 // Handle WebSocket disaster alerts
-let alertInterval; 
+let alertInterval;
 
 socket.on('disaster_alert', (msg) => {
   const data = JSON.parse(msg.data);
@@ -199,16 +199,16 @@ socket.on('disaster_alert', (msg) => {
   const tryShowNearby = setInterval(() => {
     if (userMarker && map) {
       clearInterval(tryShowNearby);
-  
+
       // 🔄 Update currentUserLocation first
       currentUserLocation = userMarker.getLatLng();
       const { lat, lng } = currentUserLocation;
-  
+
       fetchNearbyLocations(lat, lng, "shelter");
       fetchNearbyLocations(lat, lng, "hospital");
     }
   }, 100);
-  
+
 });
 
 function closePopup() {
@@ -216,7 +216,7 @@ function closePopup() {
   popup.classList.add('hidden');
 }
 
-  
+
 
 
 // Track live user location on the map
@@ -245,7 +245,7 @@ function startLiveLocationTracking() {
           .openPopup();
       }
     },
-    
+
     error => {
       console.error("Location error:", error);
       alert("Location error occurred. Check permissions.");
@@ -256,8 +256,8 @@ function startLiveLocationTracking() {
       timeout: 10000
     }
   );
-  
-  
+
+
 }
 
 // Initialize Leaflet map
@@ -284,7 +284,7 @@ function toggleChat() {
   chatbot.classList.toggle('hidden');
 }
 
-async function sendMessage() {
+  async function sendMessage() {
   const msg = userInput.value.trim();
   if (!msg) return;
   appendMessage(msg, 'user-msg');
@@ -294,9 +294,9 @@ async function sendMessage() {
     appendMessage(botReply, 'bot-msg');
     chatBody.scrollTop = chatBody.scrollHeight;
   }, 600);
-}
+  }
 
-function appendMessage(text, className) {
+  function appendMessage(text, className) {
   const div = document.createElement('div');
   div.className = `chatbot-msg ${className}`;
   div.innerText = text;
@@ -358,7 +358,7 @@ async function fetchDisasterInfo() {
 
 userInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') sendMessage();
-});
+  });
 
 
 
@@ -458,13 +458,13 @@ document.getElementById('report-form').addEventListener('submit', function (e) {
     method: 'POST',
     body: formData
   })
-  .then(res => res.json())
-  .then(response => {
-    alert(response.message);
-    document.getElementById('report-form').reset();
-  })
-  .catch(err => {
-    alert("Submission failed");
-    console.error(err);
-  });
+    .then(res => res.json())
+    .then(response => {
+      alert(response.message);
+      document.getElementById('report-form').reset();
+    })
+    .catch(err => {
+      alert("Submission failed");
+      console.error(err);
+    });
 });
