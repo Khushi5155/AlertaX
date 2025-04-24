@@ -12,9 +12,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
   <audio id="alertSound" src="{{ url_for('static', filename='alert.mp3') }}" preload="auto"></audio>
-
-
-
 </head>
 
 <body>
@@ -27,12 +24,12 @@
       <button class="menu-toggle" id="menu-toggle">&#9776;</button>
 
       <div class="nav-links" id="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Alerts</a>
-        <a href="#">Smart Map</a>
-        <a href="#">Emergency</a>
-        <a href="#">Resources</a>
-        <a href="#">Report Disaster</a>
+        <a href="#home">Home</a>
+        <a href="#alerts">Alerts</a>
+        <a href="#smartmap">Smart Map</a>
+        <a href="#emergency">Emergency</a>
+        <a href="#resources">Resources</a>
+        <a href="#report">Report Disaster</a>
         <select name="language" class="language-select">
           <option value="en">English</option>
           <option value="hi">Hindi</option>
@@ -45,7 +42,7 @@
 
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero" id="home">
     <div class="slider">
       <div class="slide slide1"></div>
       <div class="slide slide2"></div>
@@ -60,7 +57,7 @@
 
 
   <!-- Headline Section-->
-  <div class="news-ticker">
+  <div class="news-ticker" id="alerts">
     <span class="ticker-title">🔴 Recent Disasters:</span>
     <div class="ticker-wrap">
       <div id="disaster-ticker" class="ticker-move">
@@ -99,7 +96,7 @@
   <button class="toggle-btn" onclick="toggleChat()">💬</button>
 
 
-  <section class="smart-map-section">
+  <section class="smart-map-section" id="smartmap">
     <h2> Smart Map</h2>
     <p>Live view of disaster-prone areas and nearby shelters</p>
     <div id="smartMap"></div>
@@ -107,7 +104,7 @@
 
 
   <!-- Emergency Section -->
-  <section class="emergency-section">
+  <section class="emergency-section" id="emergency">
     <h2 class="section-title">⚠ Emergency</h2>
     <div class="emergency-container">
 
@@ -151,7 +148,7 @@
 
 
   <!--Resources section-->
-  <section class="resources-section">
+  <section class="resources-section" id="resources">
     <h2>Resources</h2>
     <div class="filters">
       <select id="disasterSelect">
@@ -173,7 +170,7 @@
 
 
   <!-- Report Disaster Section-->
-  <section class="report-disaster-section">
+  <section class="report-disaster-section" id="report">
     <div class="container">
       <h2 class="section-title">Report a Disaster</h2>
 
@@ -220,12 +217,12 @@
       <div class="footer-column">
         <h4>🔗 Quick Links</h4>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Live Alerts</a></li>
-          <li><a href="#">Smart Map</a></li>
-          <li><a href="#">Emergency</a></li>
-          <li><a href="#">Resources</a></li>
-          <li><a href="#">Report Disaster</a></li>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#alerts">Live Alerts</a></li>
+          <li><a href="#smartmap">Smart Map</a></li>
+          <li><a href="#emergency">Emergency</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><a href="#report">Report Disaster</a></li>
         </ul>
       </div>
 

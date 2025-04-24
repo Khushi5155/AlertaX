@@ -77,8 +77,8 @@ function fetchNearbyLocations(lat, lng, type) {
 function displayLocationsOnMap(locations, type) {
   // Use CDN icons as a reliable fallback
   const iconUrl = type === "hospital"
-    ? "https://cdn-icons-png.flaticon.com/512/2967/2967350.png" // Hospital icon
-    : "https://cdn-icons-png.flaticon.com/512/190/190411.png"; // Shelter icon
+    ? "https://cdn-icons-png.flaticon.com/512/684/684908.png" // Hospital icon
+    : "https://cdn-icons-png.flaticon.com/512/484/484167.png"; // Shelter icon
 
   const icon = L.icon({
     iconUrl: iconUrl,
@@ -138,11 +138,14 @@ function stopVoiceAlert() {
 }
 
 
-// Show popup alert on UI
+let alertInterval = null; // Make it accessible outside the function
+
 function showPopup(message) {
+  // Remove any existing popup
   const existing = document.querySelector('.popup-alert');
   if (existing) existing.remove();
 
+  // Create and show the popup
   const popup = document.createElement('div');
   popup.classList.add('popup-alert');
   popup.innerHTML = `
@@ -151,23 +154,29 @@ function showPopup(message) {
   `;
   document.body.appendChild(popup);
 
+  // Start repeating voice alert every 3 seconds
+  if (alertInterval) clearInterval(alertInterval); // clear previous interval if any
+  alertInterval = setInterval(() => {
+    generateVoiceAlert(message);
+  }, 3000);
+
   // Close button logic
   popup.querySelector('.popup-close').onclick = () => {
     popup.remove();
-    stopVoiceAlert();
+    stopVoiceAlert();          // stop any current speech
+    clearInterval(alertInterval); // stop repeating voice
+    alertInterval = null;
   };
-
-  // Auto-remove after 10s
-  setTimeout(() => {
-    popup.remove();
-    stopVoiceAlert();
-  }, 5000);
 }
 
 
 
+
+
+
+
 // Handle WebSocket disaster alerts
-let alertInterval;
+
 
 socket.on('disaster_alert', (msg) => {
   const data = JSON.parse(msg.data);
@@ -177,15 +186,12 @@ socket.on('disaster_alert', (msg) => {
   showPopup(alertMessage);
 
   //Start repeating voice alert every 3 seconds
-  alertInterval = setInterval(() => {
-    generateVoiceAlert(alertMessage);
-  }, 3000);
-
+  
   // Optional: show extra details somewhere after a delay
   setTimeout(() => {
-    const alertsDiv = document.getElementById('alerts');
+    const alertsDiv = document.getElementById('disasterNotify');
     const alertElement = document.createElement('div');
-    alertElement.classList.add('alert');
+    alertElement.classList.add('alerts');
     alertElement.innerHTML = `
       <strong>${data.disaster_type}</strong><br>
       Location: ${data.location}<br>
@@ -275,58 +281,62 @@ document.getElementById('menu-toggle').addEventListener('click', () => {
 
 
 
-// Chatbot
+
+
 const chatBody = document.getElementById('chatBody');
 const userInput = document.getElementById('userInput');
 const chatbot = document.getElementById('chatbot');
 
+// Toggle chat visibility
 function toggleChat() {
   chatbot.classList.toggle('hidden');
 }
 
-  async function sendMessage() {
+// Send user message and fetch bot reply
+async function sendMessage() {
   const msg = userInput.value.trim();
   if (!msg) return;
+  
   appendMessage(msg, 'user-msg');
   userInput.value = '';
-  setTimeout(() => {
-    const botReply = getBotReply(msg);
+  
+  setTimeout(async () => {
+    const botReply = await getBotReply(msg);
     appendMessage(botReply, 'bot-msg');
     chatBody.scrollTop = chatBody.scrollHeight;
   }, 600);
-  }
+}
 
-  function appendMessage(text, className) {
+// Append a message to chat body
+function appendMessage(text, className) {
   const div = document.createElement('div');
   div.className = `chatbot-msg ${className}`;
   div.innerText = text;
   chatBody.appendChild(div);
 }
 
+// Core reply logic
 async function getBotReply(userMsg) {
   const msg = userMsg.toLowerCase();
 
-  // Informative replies
   if (msg.includes("earthquake")) {
-    return "🌍 An earthquake is a sudden shaking of the ground caused by the movement of the Earth's tectonic plates.\n🔒 Precautions: Drop, Cover, and Hold On. Stay away from windows and heavy objects.";
+    return "🌍 Earthquakes are sudden ground movements due to tectonic activity.\n🔒 Safety: Drop, Cover, and Hold On.";
   }
 
   if (msg.includes("flood")) {
-    return "🌊 Floods are overflows of water that submerge land. \n🔒 Precautions: Move to higher ground, avoid walking/driving through water, and keep emergency supplies ready.";
+    return "🌊 Floods are overflow of water submerging land.\n🔒 Safety: Move to higher ground. Avoid water paths.";
   }
 
   if (msg.includes("cyclone")) {
-    return "🌀 Cyclones are intense windstorms. \n🔒 Precautions: Secure loose items, stay indoors, and keep emergency contacts handy.";
+    return "🌀 Cyclones bring strong winds and rain.\n🔒 Safety: Stay indoors and secure loose objects.";
   }
 
   if (msg.includes("tsunami")) {
-    return "🌊 A tsunami is a large sea wave caused by underwater earthquakes. \n🔒 Precautions: Move inland to higher ground, stay tuned to alerts, and avoid the shore.";
+    return "🌊 Tsunamis are large waves caused by underwater quakes.\n🔒 Safety: Move inland and stay alert.";
   }
 
-  // Ask for disaster info
   if (
     msg.includes("disaster") ||
-    msg.includes("recent") ||
     msg.includes("alert") ||
     msg.includes("emergency") ||
     msg.includes("rescue") ||
@@ -335,30 +345,32 @@ async function getBotReply(userMsg) {
     return await fetchDisasterInfo();
   }
 
-  // Greetings and other replies
-  if (msg.includes("hello") || msg.includes("hi")) return "Hello there! 👋";
-  if (msg.includes("services")) return "We offer real-time disaster alerts, safety tips, and emergency preparedness resources.";
-  if (msg.includes("about")) return "We are AlertaX – your disaster alert and safety guide platform.";
-
-  return "🤖 Sorry, I didn't quite catch that. Try asking about disasters or our services.";
+  if (msg.includes("hello") || msg.includes("hi")) return "👋 Hello there! How can I help?";
+  if (msg.includes("services")) return "🛠️ We offer disaster alerts, safety kits, and nearby help info.";
+  if (msg.includes("about")) return "🔔 AlertaX is your disaster safety guide platform.";
+  
+  return "🤖 I didn't understand that. Try asking about a disaster or type 'services'.";
 }
 
+// Real-time disaster info from ReliefWeb
 async function fetchDisasterInfo() {
   try {
     const proxy = "https://cors-anywhere.herokuapp.com/";
     const url = "https://api.reliefweb.int/v1/disasters?appname=alertax&profile=lite";
     const res = await fetch(proxy + url);
     const data = await res.json();
-    const first = data.data[0].fields;
-    return `🆘 Latest Disaster Alert:\nName: ${first.name}\nStatus: ${first.status}\nType: ${first.type[0]}`;
+    const latest = data.data[0].fields;
+    
+    return `🆘 Latest Disaster:\n• Name: ${latest.name}\n• Type: ${latest.type[0]}\n• Status: ${latest.status}`;
   } catch (err) {
-    return "⚠️ Unable to fetch real-time disaster info. Check your internet connection or browser permissions.";
+    return "⚠️ Unable to fetch disaster updates. Please try again later.";
   }
 }
 
+// Handle Enter key to send message
 userInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') sendMessage();
-  });
+});
 
 
 

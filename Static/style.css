@@ -334,6 +334,17 @@ body {
   font-size: 1.2rem;
   cursor: pointer;
 }
+.notify.hidden {
+  animation: blink 1s infinite;
+  color: red; /* You can customize */
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 
 /* CHATBOT SECTION */
 .chatbot {

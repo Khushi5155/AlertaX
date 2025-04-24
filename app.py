@@ -43,7 +43,7 @@ def get_disasters():
                 continue
             
             try:
-                event_date = datetime.fromisoformat(date_str.split("T")[0])
+                event_date = datetime.fromisoformat(date_str.split("T")[0]).replace(tzinfo=timezone.utc)
             except ValueError:
                 continue
 
