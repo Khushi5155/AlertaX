@@ -60,7 +60,7 @@
 - Backend: JavaScript, Python(flask)
 - Database: MongoDB
 - APIs: ReliefWeb Disasters API, ReliefWeb Disasters API, Web Speech API (SpeechSynthesis ), Socket.io, The WebSocket API (WebSockets)
-- Hosting:
+- Hosting: Render
 
 ### Sponsor Technologies Used (if any):
 
