@@ -12,6 +12,7 @@ flask-cors==5.0.1
 Flask-SocketIO==5.5.1
 fluvio==0.20.0
 greenlet==3.2.0
+gunicorn
 h11==0.14.0
 humanfriendly==10.0
 idna==3.10
