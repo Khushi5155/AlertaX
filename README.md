@@ -78,7 +78,7 @@
 
 **Most Important Features:**
 
-- **Disaster Reporting:** Users can manually report a disaster in their area.
+- **Disaster Reporting:** Users can access their live location on map.
 
 - **Interactive Map:** Shows nearby reported disasters and available shelters.
 
@@ -210,6 +210,9 @@ That's how *alertaX* was born — a disaster awareness and reporting tool design
 😂 Fun Moments:
 
 - Arguing over button colors at 3AM — because obviously, the Save Lives button can’t be plain blue 🙄
+
+  ---
+  
 
 🙌 Shout-outs:
 
