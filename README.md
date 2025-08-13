@@ -2,7 +2,7 @@
 
 # 🚀 AlertaX - Disaster Alert System
 
-> Stay Alert, Stay Safe
+> Stay Alert, Stay Safe with AlertaX
 
 ---
 
@@ -58,7 +58,7 @@
 
 - Frontend: HTML, CSS, JavaScript 
 - Backend: JavaScript, Python(flask)
-- Database: MongoDB
+- Database: MongoDB (for storing data)
 - APIs: ReliefWeb Disasters API, ReliefWeb Disasters API, Web Speech API (SpeechSynthesis ), Socket.io, The WebSocket API (WebSockets)
 - Hosting: Render
 
